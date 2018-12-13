@@ -1,0 +1,135 @@
+################################################################################
+#                           Service Metadata                                   #
+################################################################################
+swagger: "2.0"
+
+info:
+  version: "1.0"
+  title: Custom API Basic Auth Example
+  description: An example OpenAPI implementation for integration with Murano.
+  contact:
+    name: Michael Anderson
+    email: michaelanderson@exosite.com
+
+################################################################################
+#                            API Information                                   #
+################################################################################
+
+# A hostname with a valid, signed, and active TSL certificate is required.
+host: host.exosite.io
+basePath: /api/v1.0
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+################################################################################
+#                      Service Configuration Parameters                        #
+################################################################################
+x-exosite-config-parameters:
+  - name:         username
+    description:  Custome API username
+    type:         string
+    required:     true
+  - name:         password
+    description:  Custom API password
+    type:         string
+    required:     true
+
+################################################################################
+#                                  Security                                    #
+################################################################################
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: HTTP basic header
+    x-exosite-user-field: username
+    x-exosite-secret-field: password
+security:
+  - basicAuth: []
+
+################################################################################
+#                                Operations                                    #
+################################################################################
+paths:
+  /assets:
+    get:
+      description: Asset list
+      operationId: assets
+      responses:
+        "200":
+          description: successful response
+          schema:
+            $ref: "#/definitions/Asset"
+        default:
+          description: Errors
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /assets/{id}:
+    get:
+      description: Asset information
+      operationId: asset
+      parameters:
+      - name: id
+        in: path
+        required: false
+        description: ID of asset
+        type: string
+      responses:
+        "200":
+          description: successful response
+          schema:
+            $ref: "#/definitions/Asset"
+        default:
+          description: Errors
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /assets/{id}/state:
+    get:
+      description: Asset current state
+      operationId: assetState
+      parameters:
+      - name: id
+        in: path
+        required: false
+        description: The id of the asset
+        type: string
+      responses:
+        "200":
+          description: successful response
+          schema:
+            $ref: "#/definitions/Asset"
+        default:
+          description: Errors
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+definitions:
+  Asset:
+    type: object
+    description: Asset payload
+    properties:
+      id:
+        type: string
+        description: The id of the asset
+      name:
+        type: string
+        description: The name of the Asset as specified by the user
+  ErrorResponse:
+    type: object
+    description: Error response that stops the pipeline.
+    properties:
+      message:
+        type: string
+        description: Error message
+      status:
+        type: number
+        description: A numerical code for the error
+      name:
+        description: Error type
+        type: string
