@@ -1,0 +1,95 @@
+################################################################################
+#                           Service Metadata                                   #
+################################################################################
+swagger: "2.0"
+
+info:
+  version: "1.0"
+  title: Custom API Token Example
+  description: An example OpenAPI implementation for integration with Murano.
+  contact:
+    name: Michael Anderson
+    email: michaelanderson@exosite.com
+
+################################################################################
+#                            API Information                                   #
+################################################################################
+
+# A hostname with a valid, signed, and active TSL certificate is required.
+host: host.exosite.io
+basePath: /api/v1.0
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+################################################################################
+#                      Service Configuration Parameters                        #
+################################################################################
+x-exosite-config-parameters:
+  - name: auth_token
+    description: Custom API Secret Key
+    type: string
+    format: password
+    required: true
+
+################################################################################
+#                                  Security                                    #
+################################################################################
+securityDefinitions:
+  APIKeyHeader:
+    type: apiKey
+    in: header
+    name: X-API-Key
+
+# Global security (applies to all operations)
+security:
+  - APIKeyHeader: []
+
+################################################################################
+#                                Operations                                    #
+################################################################################
+paths:
+  /assets:
+    get:
+      description: Asset list
+      operationId: assets
+      responses:
+        "200":
+          description: successful response
+          schema:
+            $ref: "#/definitions/Account"
+        default:
+          description: Errors
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+definitions:
+  Asset:
+    type: object
+    description: Asset payload
+    properties:
+      id:
+        type: string
+        description: The id of the asset
+      name:
+        type: string
+        description: The name of the Asset as specified by the user
+  ErrorResponse:
+    type: object
+    description: Error response that stops the pipeline.
+    properties:
+      message:
+        type: string
+        description: Error message
+      status:
+        type: number
+        description: A numerical code for the error
+      name:
+        description: Error type
+        type: string
