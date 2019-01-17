@@ -42,4 +42,4 @@ for _, asset in ipairs(asset_list) do
 
     -- Notifies ExoSense to update
     Interface.trigger({event='event', data=data, mode='sync'})
-endj
+end
