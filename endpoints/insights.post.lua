@@ -5,6 +5,27 @@ local insightsByGroup = {}
 local emptyList = {}
 setmetatable(emptyList, {['__type']='slice'})
 
+local healthStatus = {
+  id = "healthStatus",
+  name = "Generate Health Status",
+  description = "Generate health status from input of temperature data",
+  constants = {
+    {
+      name = "threshold",
+      type = "number"
+    }
+  },
+  inlets = {
+    {
+      primitive_type = "NUMERIC",
+      description = "Input Signal"
+    }
+  },
+  outlets = {
+    primitive_type = "NUMERIC"
+  }
+}
+
 local healthScore = {
   id = "healthScore",
   name = "Generate Health Score",
@@ -38,7 +59,7 @@ local healthAction = {
   }
 }
 
-functions = {healthScore, healthAction}
+functions = {healthStatus, healthScore, healthAction}
 
 local count = table.getn(functions)
 local total = table.getn(functions)
