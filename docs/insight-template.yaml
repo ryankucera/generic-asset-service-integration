@@ -2,16 +2,14 @@ swagger: "2.0"
 
 info:
   version: "1.0"
-  title: Generic Asset Insight
+  title: Asset Health Controller
   description: |
-    This describes an Insight Module that can be added to Murano Exchange.  An Insight Module can
-    implement one or more Insight Functions.  These Insight Functions can then be added to Assets
-    as a Transformation.
+    This insight transformation provides asset health data based on configured thresholds for signal values.
   contact:
-    name: Your Name Here
-    email: YOU@BIZ.com
+    name: Michael Anderson
+    email: michaelanderson@exosite.com
 
-host: generic-asset-service.apps.exosite.io # Set this to the host your function is on
+host: healthmonitor.apps.exosite.io # Set this to the host your function is on
 basePath: / # Set this or the path according to your function
 schemes:
   - https  # Only https is supported.
