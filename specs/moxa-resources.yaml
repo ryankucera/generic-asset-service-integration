@@ -1,0 +1,16 @@
+---
+config_io:
+  allowed: []
+  format: string
+  settable: true
+  unit: ''
+data_in:
+  allowed: []
+  format: string
+  settable: false
+  unit: ''
+data_out:
+  allowed: []
+  format: string
+  settable: true
+  unit: ''

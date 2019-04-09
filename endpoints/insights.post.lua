@@ -5,10 +5,33 @@ local insightsByGroup = {}
 local emptyList = {}
 setmetatable(emptyList, {['__type']='slice'})
 
+-- local healthStatus = {
+--   id = "healthStatus",
+--   name = "Generate Health Status",
+--   description = "Generate health status from input of temperature data",
+--   constants = {
+--     {
+--       name = "threshold",
+--       type = "number"
+--     }
+--   },
+--   inlets = {
+--     {
+--       data_type = "NUMERIC",
+--       description = "Input Signal"
+--     }
+--   },
+--   outlets = {
+--     {
+--       data_type = "NUMERIC"
+--     }
+--   }
+-- }
+
 local healthStatus = {
   id = "healthStatus",
   name = "Generate Health Status",
-  description = "Generate health status from input of temperature data",
+  description = "Generate health status from input of data",
   constants = {
     {
       name = "threshold",
@@ -17,12 +40,12 @@ local healthStatus = {
   },
   inlets = {
     {
-      primitive_type = "NUMERIC",
-      description = "Input Signal"
+      data_type = "NUMBER",
+      description = "Input"
     }
   },
   outlets = {
-    primitive_type = "NUMERIC"
+    data_type = "NUMBER"
   }
 }
 
