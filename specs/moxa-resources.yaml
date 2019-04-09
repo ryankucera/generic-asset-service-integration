@@ -1,16 +1,9 @@
----
-config_io:
-  allowed: []
-  format: string
-  settable: true
-  unit: ''
-data_in:
-  allowed: []
-  format: string
-  settable: false
-  unit: ''
-data_out:
-  allowed: []
-  format: string
-  settable: true
-  unit: ''
+# Moxa Product Solution Spec File
+
+resources:
+-  alias: config_io
+   format: string
+-  alias: data_in
+   format: string
+-  alias: data_out
+   format: string
